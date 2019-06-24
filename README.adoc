@@ -1,0 +1,11 @@
+= <<title,Reactive notifications service>>
+
+Simple reactive notifications service using Webflux
+
+== <<setup,MongoDB commands>>
+    use mongodb_example;
+    db.createCollection("notification", {capped: true, size: 100000})
+
+== <<setup,Sample curls for add and get notifications>>
+    curl -X GET http://localhost:8080/notifications
+    curl -X POST http://localhost:8080/notifications -d '{ "message" : "Notification value"}' -H "Content-type: application/json"
