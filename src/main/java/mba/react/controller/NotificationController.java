@@ -28,12 +28,16 @@ public class NotificationController {
 	}
 
 	@PostMapping
-	public Mono<Notification> create(@RequestBody @Valid NotificationView notificationView) {
-		return notificationService.add(modelMapper.convertToModel(notificationView, Notification.class));
+	public Mono<NotificationView> create(@RequestBody @Valid NotificationView notificationView) {
+		return notificationService
+				.add(modelMapper.convertToModel(notificationView, Notification.class))
+				.map(n -> modelMapper.convertToView(n, NotificationView.class));
 	}
 
 	@GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	Flux<Notification> getAll() {
-		return notificationService.getAll();
+	Flux<NotificationView> getAll() {
+		return notificationService
+				.getAll()
+				.map(n -> modelMapper.convertToView(n, NotificationView.class));
 	}
 }

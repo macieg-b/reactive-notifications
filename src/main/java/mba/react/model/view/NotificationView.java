@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 public class NotificationView {
 
-    private Long id;
+    private String id;
     @NotNull
     private String message;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
